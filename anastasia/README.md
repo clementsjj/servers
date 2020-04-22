@@ -6,3 +6,8 @@ The goals of Anastasia:
   - Three availabe games (in progress): Snake, Minesweeper, and Blackjack under `/games`
   - A share directory under `/share`
 2. Possibly setup a strapi server and gatsby server, or move to second server iteration
+
+## Setup
+`cd ~`
+`git clone https://github.com/clementsjj/servers.git`
+`/bin/bash ~/servers/anastasia/install.sh`
