@@ -9,5 +9,8 @@ The goals of Anastasia:
 
 ## Setup
 `cd ~`  
+
 `git clone https://github.com/clementsjj/servers.git`  
+
 `/bin/bash ~/servers/anastasia/install.sh`  
+
