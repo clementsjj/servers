@@ -1,0 +1,66 @@
+<!-- ----- -->
+<!-- 
+/var/www/html
+or
+~/www/ 
+ -->
+<!-- index.html -->
+<!-- ----- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        background: #161a20;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="flex justify-center bg-gray-600">
+      <h1>Hello DC!</h1>
+    </div>
+    <div class="flex justify-around">
+      <div class="m-10 px-20 py-10 bg-gray-600 rounded">Moshi Moshi</div>
+      <div class="m-10 px-20 py-10 bg-gray-600 rounded">What Up</div>
+      <div class="m-10 px-20 py-10 bg-gray-600 rounded">Anyang</div>
+    </div>
+    <div class="flex justify-around">
+      <div class="m-20 rounded">
+        <img src="https://picsum.photos/300/200?random=1" />
+      </div>
+      <div class="m-20 rounded">
+        <img src="https://picsum.photos/300/200?random=2" />
+      </div>
+      <div class="m-20">
+        <img src="https://picsum.photos/300/200?random=3" />
+      </div>
+    </div>
+
+    <div
+      class="container mx-auto flex flex-wrap"
+      style="background-color: #220a29;"
+    >
+      <div
+        class="sm:w-full md:w-full lg:w-1/2 lg:px-8 px-4"
+        style="margin-top: 25px;"
+      >
+        <h1 class="text-white">"I need a name"</h1>
+        <h2 class="text-white">-This Server.</h2>
+      </div>
+      <div
+        class="md:w-full px-4 pt-4 lg:w-1/2 lg:px-8 lg:pt-0"
+        style="height: 354px;"
+      >
+        <img class="resize" src="https://picsum.photos/536/354" />
+      </div>
+    </div>
+  </body>
+</html>
