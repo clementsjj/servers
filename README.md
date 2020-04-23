@@ -18,7 +18,7 @@ Plan going forward:
 I. Anastasia  
   - Static nginx  
   
-II. Boris  
+II. Bezukhov  
   - Reverse Proxy nginx; strapi backend; gatsby frontend
   
 III. Catherine  
