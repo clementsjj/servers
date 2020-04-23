@@ -13,3 +13,11 @@ The servers will likely reside on a domain called `tsarchild.com`, a side projec
 Tsarchild pays homage to Paul Stanley, aka The Starchild, and also Russian history. 
 
 That is why the first iteration of server config is named "Anastasia", the daughter of the last Tsar of Russia, Tsar Nicholas II of the infamous Romanov Dynasty. 
+
+Plan going forward:
+I. Anastasia
+  - Static nginx
+II. Boris
+  - Reverse Proxy nginx; strapi backend; gatsby frontend
+III. Catherine
+  - Anastasia and Boris Combined.
