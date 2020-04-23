@@ -67,7 +67,13 @@ cd /home/jj/www
 git clone https://github.com/clementsjj/games.git
 # Links already accounted for in index.html
 
+alias reload="sudo systemctl reload nginx"
+alias test="sudo nginx -t"
+alias status="sudo systemctl status nginx"
+
+sudo systemctl enable nginx
 sudo systemctl start nginx
+sudo systemctl status nginx
 
 echo -e "\033[0;32mInstall Complete.\033[m"
 
