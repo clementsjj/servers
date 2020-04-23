@@ -33,9 +33,9 @@ sudo rm -rf /etc/nginx/sites-enabled
 sudo rm -rf /etc/nginx/sites-available
 
 mkdir ~/www
-mkdir ~/share
-echo "hi kate" > ~/share/kate.txt
-echo "hi jj" > ~/share/jj.txt
+mkdir ~/www/share
+echo "hi kate" > ~/www/share/kate.txt
+echo "hi jj" > ~/www/share/jj.txt
 
 
 # Curl or Clone Git Repo
@@ -45,6 +45,7 @@ pwd
 sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
 sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/index.html
+sudo curl -o /etc/nginx/conf.d/subs.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/subs.conf
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # 'servers' should already be downloaded, which is the home of this install.sh file
 #git clone https://github.com/clementsjj/servers.git
@@ -55,12 +56,13 @@ sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/serve
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 sudo chown $USER:$USER /etc/nginx/conf.d/default.conf
 sudo chown $USER:$USER /etc/nginx/nginx.conf
-
-
+sudo chown $USER:$USER /etc/nginx/conf.d/subs.conf
 
 # Setup Games
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-cd ~
+# add games
+cd ~/www
 git clone https://github.com/clementsjj/games.git
-mkdir -p ~/www/games/pinesweeper
-ln -s ~/games/pinesweeper/index.html ~/www/games/pinesweeper/index.html
+# Links already accounted for in index.html
+
+
