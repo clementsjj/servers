@@ -27,7 +27,7 @@ echo "export PATH=~/.npm-global/bin:$PATH" >> ~/.profile
 #sudo apt-get install sqlite3
 #sudo apt install tree
 #sudo apt install tmux
-echo -e "\033[9;34m sudo apt update '~/.npm-global' \033[m"
+echo -e "\033[9;34m sudo apt update \033[m"
 sudo apt update
 echo -e "\033[9;34m sudo apt install -y nginx \033[m"
 sudo apt install -y nginx
