@@ -10,6 +10,8 @@ printf "#### \n SET NPM CONFIG \n ####\n"
 echo "export PATH=~/.npm-global/bin:$PATH" >> ~/.profile
 
 sudo apt-get install sqlite3
+sudo apt install tree
+sudo apt install tmux
 sudo apt update
 sudo apt install -y nginx
 
@@ -20,10 +22,10 @@ sudo ufw enable
 sudo ufw status
 
 cd ~
-rm -rf ~/strapsby
 sleep 1
-git clone https://github.com/clementsjj/strapsby.git
-sleep 1
+
+# Sanitize & Setup Environment
+# ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Remove default nginx configuration
 sudo rm /etc/nginx/nginx.conf
@@ -31,16 +33,36 @@ sudo rm -rf /etc/nginx/sites-enabled
 sudo rm -rf /etc/nginx/sites-available
 
 mkdir ~/www
-mkdir ~/share
+mkdir ~/www/share
+echo "hi kate" > ~/www/share/kate.txt
+echo "hi jj" > ~/www/share/jj.txt
 
-# There is some problem here running the original code that copies the files from the git clone
-# Not sure why I'm getting the error
-# But curling the file from the actual github repo seems to work fine for now
-# Seeing as I am already cloning the github repo, itd be nice to use those files
-# Possibly a sudo issue??
+
+# Curl or Clone Git Repo
 # ~~~~~~~~~~~~~~~~~~~~~~~~
-sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/strapsby/master/server/anastasia/config/nginx.conf
-sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/strapsby/master/server/anastasia/config/default.conf
-sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/strapsby/master/server/anastasia/config/index.html
+echo -e "\033[1;35mCopying Config Files\033[m"
+pwd
+sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
+sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
+sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/index.html
+sudo curl -o /etc/nginx/conf.d/subs.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/subs.conf
 # ~~~~~~~~~~~~~~~~~~~~~~~~
+# 'servers' should already be downloaded, which is the home of this install.sh file
+#git clone https://github.com/clementsjj/servers.git
+# cp -r servers/anastasia/config/index.html ~/www
+# cp -r servers/anastasia/config/nginx.conf /etc/nginx
+# cp -r servers/anastasia/config/subs.conf /etc/nginx/conf.d
+# cp -r servers/anastasia/config/default.conf /etc/nginx/conf.d
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+sudo chown $USER:$USER /etc/nginx/conf.d/default.conf
+sudo chown $USER:$USER /etc/nginx/nginx.conf
+sudo chown $USER:$USER /etc/nginx/conf.d/subs.conf
+
+# Setup Games
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+# add games
+cd ~/www
+git clone https://github.com/clementsjj/games.git
+# Links already accounted for in index.html
+
 
