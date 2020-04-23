@@ -76,6 +76,7 @@ alias status="sudo systemctl status nginx"
 
 sudo systemctl enable nginx
 sudo systemctl start nginx
+sudo systemctl reload nginx
 sudo systemctl status nginx
 
 echo -e "\033[0;32mInstall Complete.\033[m"
