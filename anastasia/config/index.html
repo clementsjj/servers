@@ -24,7 +24,7 @@ or
     <title>Anastasia</title>
   </head>
   <body>
-    <div class="flex justify-center bg-gray-600">
+    <div class="flex justify-center bg-gray-900 text-white">
       <h1>Hello DC!</h1>
     </div>
 	
@@ -33,9 +33,28 @@ or
 		<div style="position: relative; text-align: center; color: white;">
 			<img class="rounded" style="width:100%" src="https://picsum.photos/300/200?random=3" />
 			<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.9;">
-				<a href="/games/pinesweeper/"><div class="bg-transparent hover:bg-blue-500 m-10 px-20 py-10 bg-gray-600 rounded">Games</div></a>
+				
+				
+				<!-- <div class="bg-transparent m-10 px-20 py-10 bg-gray-600 rounded"> -->
+					<p class="bg-transparent mb-2 px-1 py-1 bg-gray-600 rounded">Games</p>
+					<div class="flex flex-row justify-between ">
+						<button onclick="window.location.pathname='/games/pinesweeper/';" class="mr-1 bg-gray-600 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Pinesweeper</button>
+						
+						<button onclick="window.location.pathname='/games/matching-game/';" class="ml-1 bg-gray-600 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Matching</button>
+						<!-- <a href="/games/matching-game" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Matching</a> -->
+						<!-- <a href="/games/matching-game" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">Matching</a> -->
+					</div>
+				<!-- </div> -->
+				
+				
 			</div>
 		</div>
+		
+		
+		
+		
+		
+		
 		<div style="position: relative; text-align: center; color: white;">
 			<img class="rounded" style="width:100%" src="https://picsum.photos/300/200?random=4" />
 			<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.9;">
@@ -45,9 +64,12 @@ or
 		<div style="position: relative; text-align: center; color: white;">
 			<img style="width:100%" src="https://picsum.photos/300/200?random=5" />
 			<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+			
 			</div>
 		</div>
+		
 	</div>
+
     <div
       class="container mx-auto flex flex-wrap"
       style="background-color: #220a29;"
