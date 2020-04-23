@@ -1,7 +1,5 @@
 # Server Collection
 
-This folder will soon be moved to its own repo.
-
 The goal of the server collection is to provide premade server configurations for quick starting nginx servers.
 
 The three primary goals are to:
