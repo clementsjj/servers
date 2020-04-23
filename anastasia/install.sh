@@ -1,5 +1,11 @@
 #!/bin/bash
 echo $HOME
+sudo mkdir /home/jj
+sudo mkdir /home/jj/www
+sudo mkdir /home/jj/www/share
+sudo chown -R $USER:$USER /home/jj
+
+
 printf "#####\nINSTALLING NODEJS\n#####"
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
@@ -21,8 +27,7 @@ sudo ufw allow 22/tcp
 sudo ufw enable
 sudo ufw status
 
-cd ~
-sleep 1
+cd /home/jj
 
 # Sanitize & Setup Environment
 # ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,9 +38,6 @@ sudo rm -rf /etc/nginx/sites-enabled
 sudo rm -rf /etc/nginx/sites-available
 sudo rm /etc/nginx/conf.d/default.conf
 
-mkdir /home/jj
-mkdir /home/jj/www
-mkdir /home/jj/www/share
 echo "hi kate" > /home/jj/www/share/kate.txt
 echo "hi jj" > /home/jj/www/share/jj.txt
 
@@ -43,7 +45,7 @@ echo "hi jj" > /home/jj/www/share/jj.txt
 # Curl or Clone Git Repo
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 echo -e "\033[1;35mCopying Config Files\033[m"
-pwd
+
 sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/index.html
@@ -64,7 +66,8 @@ sudo chown $USER:$USER /etc/nginx/conf.d/subs.conf
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # add games
 cd /home/jj/www
-git clone https://github.com/clementsjj/games.git
+sudo git clone https://github.com/clementsjj/games.git
+sudo chown -R $USER:$USER /home/jj/www/games
 # Links already accounted for in index.html
 
 alias reload="sudo systemctl reload nginx"
