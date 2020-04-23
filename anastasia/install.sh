@@ -8,16 +8,25 @@ sudo chown -R $USER:$USER /home/jj
 
 printf "#####\nINSTALLING NODEJS\n#####"
 
+echo -e "\033[9;34m curl source \033[m"
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
+
+echo -e "\033[9;34m sudo apt-get install nodejs \033[m"
 sudo apt-get install nodejs
+
+echo -e "\033[9;34m mkdir ~/.npm-global \033[m"
 mkdir ~/.npm-global
+
+echo -e "\033[9;34m npm config set prfix '~/.npm-global' \033[m"
 npm config set prfix '~/.npm-global'
+
 printf "#### \n SET NPM CONFIG \n ####\n"
+
 echo "export PATH=~/.npm-global/bin:$PATH" >> ~/.profile
 
-sudo apt-get install sqlite3
-sudo apt install tree
-sudo apt install tmux
+#sudo apt-get install sqlite3
+#sudo apt install tree
+#sudo apt install tmux
 sudo apt update
 sudo apt install -y nginx
 
