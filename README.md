@@ -17,7 +17,10 @@ I. Anastasia
   - Static nginx  
   
 II. Bezukhov  
-  - Reverse Proxy nginx; strapi backend; gatsby frontend
+  - Reverse Proxy nginx; strapi w/ node backend; gatsby frontend
   
 III. Catherine  
-  - Anastasia and Boris Combined.
+  - Anastasia and Bezukhov Combined.
+  
+ IV. Dostoevsky  
+  - Caddy Server or Simple Rust Server
