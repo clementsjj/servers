@@ -1,11 +1,11 @@
 #!/bin/bash
-# 34m=blue;32m=green;
+# 34m=blue;32m=green;36m=cyan;35m=magenta;31m=red;
 
 echo -e  
 echo -e "\033[0;34m |\033[m${i}"
 
 
-programs=(nginx node npm htop tmux)
+programs=(nginx htop tmux pm2)
 notinstalled=()
 
 for i in ${programs[@]}
@@ -13,10 +13,13 @@ do
 	echo -e "\033[0;34m |\033[m${i}"
 	if [ `which $i` ]
 	then 
-		echo -e "\033[0;32m	-Installed!\033[m"
+		echo -e "\033[0;32m	-Already Installed.\033[m"
 	else 
 		echo -e "\033[9;31m	-Not Installed\033[m"
 		notinstalled+=( $i )
+		echo "Installing ${i}"
+		
+
 	fi
 done
 
@@ -29,3 +32,6 @@ then
 		echo ${i}
 	done
 fi
+
+# Node
+programs=(node npm)

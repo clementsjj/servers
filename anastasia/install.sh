@@ -31,11 +31,13 @@ sleep 1
 sudo rm /etc/nginx/nginx.conf
 sudo rm -rf /etc/nginx/sites-enabled
 sudo rm -rf /etc/nginx/sites-available
+sudo rm /etc/nginx/conf.d/default.conf
 
-mkdir ~/www
-mkdir ~/www/share
-echo "hi kate" > ~/www/share/kate.txt
-echo "hi jj" > ~/www/share/jj.txt
+mkdir /home/jj
+mkdir /home/jj/www
+mkdir /home/jj/www/share
+echo "hi kate" > /home/jj/www/share/kate.txt
+echo "hi jj" > /home/jj/www/share/jj.txt
 
 
 # Curl or Clone Git Repo
@@ -44,7 +46,7 @@ echo -e "\033[1;35mCopying Config Files\033[m"
 pwd
 sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
-sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/index.html
+sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/index.html
 sudo curl -o /etc/nginx/conf.d/subs.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/subs.conf
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # 'servers' should already be downloaded, which is the home of this install.sh file
@@ -61,8 +63,11 @@ sudo chown $USER:$USER /etc/nginx/conf.d/subs.conf
 # Setup Games
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # add games
-cd ~/www
+cd /home/jj/www
 git clone https://github.com/clementsjj/games.git
 # Links already accounted for in index.html
 
+sudo systemctl start nginx
+
+echo -e "\033[0;32mInstall Complete.\033[m"
 
