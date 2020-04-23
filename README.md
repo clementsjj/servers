@@ -23,4 +23,4 @@ III. Catherine
   - Anastasia and Bezukhov Combined.
   
  IV. Dostoevsky  
-  - Caddy Server or Simple Rust Server
+  - Caddy Server or Simple Rust Server with a node based cli for setup
