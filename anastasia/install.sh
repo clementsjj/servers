@@ -53,6 +53,10 @@ sudo curl -o ~/www/index.html https://raw.githubusercontent.com/clementsjj/serve
 # cp -r servers/anastasia/config/subs.conf /etc/nginx/conf.d
 # cp -r servers/anastasia/config/default.conf /etc/nginx/conf.d
 # ~~~~~~~~~~~~~~~~~~~~~~~~
+sudo chown $USER:$USER /etc/nginx/conf.d/default.conf
+sudo chown $USER:$USER /etc/nginx/nginx.conf
+
+
 
 # Setup Games
 # ~~~~~~~~~~~~~~~~~~~~~~~~
