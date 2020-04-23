@@ -12,8 +12,7 @@ The goals of Anastasia:
 
 `git clone https://github.com/clementsjj/servers.git`  
 
-`cd ~/servers/anastasia`
+`~/servers/anastasia/install.sh`
 
-`make install`
 
 
