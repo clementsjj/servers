@@ -5,7 +5,7 @@ sudo mkdir /home/jj/www
 sudo mkdir /home/jj/www/share
 sudo chown -R $USER:$USER /home/jj
 
-
+# Node and NPM are not actually needed in this install since it is technically only serving static files
 echo -e "\033[9;34m ## Running: curl nodejs12 source \033[m"
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
 
@@ -13,15 +13,15 @@ echo -e "\033[9;34m ## Running: sudo apt-get install nodejs \033[m"
 sudo apt-get install nodejs
 
 echo -e "\033[9;34m ## Running: mkdir ~/.npm-global \033[m"
-mkdir ~/.npm-global
+mkdir home/jj/.npm-global
 
-echo -e "\033[9;34m ## Running: npm config set prfix '~/.npm-global' \033[m"
-npm config set prfix '~/.npm-global'
+echo -e "\033[9;34m ## Running: npm config set prefix '/home/jj/.npm-global' \033[m"
+npm config set prefix '/home/jj/.npm-global'
 
 printf "#### \n SET NPM CONFIG \n ####\n"
 
 echo -e "\033[9;34m ## Appending profile PATH to include .npm-global binaries '~/.npm-global' \033[m"
-echo "export PATH=~/.npm-global/bin:$PATH" >> ~/.profile
+echo "export PATH=/home/jj/.npm-global/bin:$PATH" >> ~/.profile
 
 #sudo apt-get install sqlite3
 #sudo apt install tree
