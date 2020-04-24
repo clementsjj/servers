@@ -100,11 +100,26 @@ sudo chown $USER:$USER /etc/nginx/nginx.conf
 sudo chown $USER:$USER /home/jj/www/index.html
 
 # Download node server
+echo -e "\033[35m ## Downloading nodeserver\033[m"
+curl -O /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
 
-# Open ufw port 3000
+# Create share files
+echo -e "\033[35m ## Creating Share\033[m"
+echo "hi kate" > /home/jj/www/share/kate.txt
+echo "hi jj" > /home/jj/www/share/jj.txt
+
+# Configure ufw
+echo -e "\033[35m ## Configuring Firewall\033[m"
+sudo ufw allow 'Nginx Full'
+sudo ufw allow 'OpenSSH'
+sudo ufw allow 22/tcp
+sudo ufw allow 3000
+sudo ufw enable
+sudo ufw reload
+sudo ufw status
 
 # launch node behind pm2
-
+node /home/jj/nodeserver.js
 
 # Copy bashrc into .bak
 
