@@ -14,6 +14,7 @@ rm -rf Desktop/ Documents/ Downloads/ Music/ Pictures/ Public/ Templates/ Videos
 sudo mkdir /home/jj
 sudo mkdir /home/jj/www
 sudo mkdir /home/jj/www/share
+sudo mkdir /home/jj/www/backend
 sudo chown -R $USER:$USER /home/jj
 
 echo -e "\033[9;35m ## Updating apt \033[m"
@@ -53,7 +54,8 @@ echo -e "\033[9;34m ## Running: npm config set prefix '/home/jj/.npm-global' \03
 npm config set prefix '/home/jj/.npm-global'
 
 echo -e "\033[9;35m ## Checking Packages \033[m"
-programs=(nginx htop tmux pm2 ufw git)
+# Find way to check npm global packages!
+programs=(nginx htop tmux ufw git wget yarn sqlite3)
 notinstalled=()
 # Install packages other than Nodejs(includes NPM), NPX
 for i in ${programs[@]}
@@ -69,39 +71,39 @@ do
 done
 
 echo -e "Packages to install: ${notinstalled[@]}"
-
 # Install packages that don't already exist.
 # This needs to be run after nodejs installation iot install pm2 and npx
 for i in ${notinstalled[@]}
 do
 	echo -e "\033[9;35m ## Installing ${i}...\033[m"
-	if [ ${i} != pm2 ]
-	then 
-		sudo apt install -qy ${i}
-	else
-		# Special pm2 install package
-		echo "Installing pm2."
-		npm install -g pm2
-	fi
-		
+		sudo apt -q install -y ${i}
 done
 
-echo -e "\033[9;35m ## Install npx \033[m"
+echo -e "\033[9;35m ## Install npx and pm2 \033[m"
 npm install -g npx
+npm install -g gatsby-cli
 
-# setup nginx config files + html
+#npm install -g pm2 -- Not working?? Need to check npm config files
+### AHH didn't work because i haven't set my bashrc file to read npm globals...!!!!
+wget -qO- https://getpm2.com/install.sh | bash
+pm2 install pm2-server-monit
+
+# setup nginx config files + html + nodeserver
+
+#####################################
+#############Add TMUX conf...
+
+
 echo -e "\033[35m ## Copying Config Files\033[m"
 sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
-sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
+sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/default.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/index.html
+curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
 echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
-sudo chown $USER:$USER /etc/nginx/conf.d/default.conf
+sudo chown -R $USER:$USER /etc/nginx/conf.d
 sudo chown $USER:$USER /etc/nginx/nginx.conf
 sudo chown $USER:$USER /home/jj/www/index.html
 
-# Download node server
-echo -e "\033[35m ## Downloading nodeserver\033[m"
-curl -O /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
 
 # Create share files
 echo -e "\033[35m ## Creating Share\033[m"
@@ -114,17 +116,28 @@ sudo ufw allow 'Nginx Full'
 sudo ufw allow 'OpenSSH'
 sudo ufw allow 22/tcp
 sudo ufw allow 3000
+sudo ufw allow 1337
 sudo ufw enable
 sudo ufw reload
 sudo ufw status
 
-# launch node behind pm2
-node /home/jj/nodeserver.js
+
 
 # Copy bashrc into .bak
+mkdir /home/$USER/.bak
+cp /home/$USER/.bashrc /home/$USER/.bak/.bashrc.bak 
 
-# Set Aliases in bashrc
 
+# Set Aliases and path in bashrc
+echo -e "\033[9;35m ## Setting .bashrc ##\033[m"
+echo "alias test='sudo nginx -t'" >> /home/$USER/.bashrc
+echo "alias status='sudo systemctl status nginx'" >> /home/$USER/.bashrc
+echo "alias reload='sudo systemctl reload nginx'" >> /home/$USER/.bashrc
+echo "alias nodestart='pm2 start /home/jj/www/nodeserver.js'" >> /home/$USER/.bashrc
+echo "alias nodestop='pm2 stop /home/jj/www/nodeserver.js'" >> /home/$USER/.bashrc
+echo "alias monit='pm2 monit'" >> /home/$USER/.bashrc
+echo "export PATH=/home/jj/.npm-global/bin:$PATH" >> /home/$USER/.bashrc
+source /home/$USER/.bashrc
 
 # launch nginx
 echo -e "\033[1;35m ## Starting Nginx\033[m"
@@ -133,8 +146,12 @@ sudo systemctl start nginx
 sudo systemctl reload nginx
 sudo systemctl status nginx
 
-echo -e "\033[35m ## Copying Config Files\033[m"
+# launch node behind pm2
+pm2 start /home/jj/nodeserver.js
+
+# Start Strapi Biz
+
 
 echo -e "\033[9;35m ## SETUP COMPLETE ##\033[m"
-
+echo "Run setupbackend.sh"
 
