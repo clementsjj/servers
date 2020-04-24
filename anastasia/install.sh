@@ -1,7 +1,7 @@
 #!/bin/bash
 echo $HOME
 printf "#####\nINSTALLING NODEJS\n#####"
-
+mkdir /home/jj
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
 sudo apt-get install nodejs
 mkdir ~/.npm-global
@@ -21,7 +21,7 @@ sudo ufw allow 22/tcp
 sudo ufw enable
 sudo ufw status
 
-cd ~
+cd /home/jj
 sleep 1
 
 # Sanitize & Setup Environment
@@ -33,7 +33,7 @@ sudo rm -rf /etc/nginx/sites-enabled
 sudo rm -rf /etc/nginx/sites-available
 sudo rm /etc/nginx/conf.d/default.conf
 
-mkdir /home/jj
+
 mkdir /home/jj/www
 mkdir /home/jj/www/share
 echo "hi kate" > /home/jj/www/share/kate.txt
