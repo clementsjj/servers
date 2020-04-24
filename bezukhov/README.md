@@ -1,5 +1,7 @@
 ## Setup
 
-`cd ~`
-
-`git clone --no-checkout https://github.com/clementsjj/servers.git && servers/bezukhov/softrun.sh`
+```sh
+curl -O https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/softrun.sh \
+&& curl -O https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/reset.sh \
+&& ./softrun.sh
+```

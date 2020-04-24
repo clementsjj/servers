@@ -77,7 +77,7 @@ do
 	echo -e "\033[9;35m ## Installing ${i}...\033[m"
 	if [ ${i} != pm2 ]
 	then 
-		sudo apt install -y ${i}
+		sudo apt install -qy ${i}
 	else
 		# Special pm2 install package
 		echo "Installing pm2."
@@ -89,12 +89,36 @@ done
 echo -e "\033[9;35m ## Install npx \033[m"
 npm install -g npx
 
+# setup nginx config files + html
+echo -e "\033[35m ## Copying Config Files\033[m"
+sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
+sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/default.conf
+sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/index.html
+echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
+sudo chown $USER:$USER /etc/nginx/conf.d/default.conf
+sudo chown $USER:$USER /etc/nginx/nginx.conf
+sudo chown $USER:$USER /home/jj/www/index.html
+
+# Download node server
+
+# Open ufw port 3000
+
+# launch node behind pm2
 
 
+# Copy bashrc into .bak
+
+# Set Aliases in bashrc
 
 
+# launch nginx
+echo -e "\033[1;35m ## Starting Nginx\033[m"
+sudo systemctl enable nginx
+sudo systemctl start nginx
+sudo systemctl reload nginx
+sudo systemctl status nginx
 
-
+echo -e "\033[35m ## Copying Config Files\033[m"
 
 echo -e "\033[9;35m ## SETUP COMPLETE ##\033[m"
 
