@@ -97,6 +97,7 @@ pm2 install pm2-server-monit
 echo -e "\033[35m ## Copying Config Files\033[m"
 sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/anastasia/config/nginx.conf
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/default.conf
+sudo curl -o /etc/nginx/conf.d/nodereverse.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/nodereverse.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/index.html
 curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
 echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
@@ -153,5 +154,5 @@ pm2 start /home/jj/nodeserver.js
 
 
 echo -e "\033[9;35m ## SETUP COMPLETE ##\033[m"
-echo "Run setupbackend.sh"
+echo "Run setupbackend.sh to setup Strapi"
 
