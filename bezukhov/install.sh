@@ -1,8 +1,12 @@
 #!/bin/bash
-
-#!/bin/bash
 # 34m=blue;32m=green;36m=cyan;35m=magenta;31m=red; 
-#echo -e "\033[0;34m |\033[m${i}"
+
+# Arrays
+programs=(nginx htop tmux ufw git wget yarn sqlite3)
+notinstalled=()
+npmpackages=(pm2 npx gatsby)
+npmnotinstalled=()
+
 echo "Beginning Installation..."
 echo -e "\033[9;34m ## BLUE \033[m Command"
 echo -e "\033[9;35m ## Magenta \033[m Description"
@@ -18,9 +22,9 @@ sudo mkdir /home/jj/www/backend
 sudo chown -R $USER:$USER /home/jj
 
 echo -e "\033[9;35m ## Updating apt \033[m"
-sudo apt update
+sudo apt -q update
 echo -e "\033[9;35m ## Upgrading apt \033[m"
-sudo apt upgrade
+sudo apt -q upgrade
 
 # Install Nodejs(includes NPM), NPX
 echo -e "\033[9;35m ## Checking Node\033[m"
@@ -55,8 +59,8 @@ npm config set prefix '/home/jj/.npm-global'
 
 echo -e "\033[9;35m ## Checking Packages \033[m"
 # Find way to check npm global packages!
-programs=(nginx htop tmux ufw git wget yarn sqlite3)
-notinstalled=()
+# Refer to programs array at top
+
 # Install packages other than Nodejs(includes NPM), NPX
 for i in ${programs[@]}
 do 
@@ -76,22 +80,54 @@ echo -e "Packages to install: ${notinstalled[@]}"
 for i in ${notinstalled[@]}
 do
 	echo -e "\033[9;35m ## Installing ${i}...\033[m"
-		sudo apt -q install -y ${i}
+	sudo apt -q install -y ${i}
 done
 
-echo -e "\033[9;35m ## Install npx and pm2 \033[m"
-npm install -g npx
-npm install -g gatsby-cli
+#######################
+# Install NPM packages
+echo -e "\033[9;35m ## Install npm packages: npx, gatsby-cli, pm2 \033[m"
+for i in ${npmpackages[@]}
+do 
+	echo -e "\033[0;34m |\033[m${i}"
+	if [ `which $i` ]
+	then 
+		echo -e "\033[0;32m	-Already Installed.\033[m"
+	else 
+		echo -e "\033[9;31m	-Not Installed\033[m"
+		npmnotinstalled+=( $i )
+	fi
+done
+
+for i in ${npmnotinstalled[@]}
+do
+	echo -e "\033[9;35m ## Installing ${i}...\033[m"
+	if [ $i = "pm2" ]
+	then	
+		wget -qO- https://getpm2.com/install.sh | bash
+		pm2 install pm2-server-monit
+	elif [ $i = "gatsby" ]
+	then
+		npm install -g gatsby-cli
+	else
+		npm install -g ${i}
+	fi
+done
 
 #npm install -g pm2 -- Not working?? Need to check npm config files
 ### AHH didn't work because i haven't set my bashrc file to read npm globals...!!!!
-wget -qO- https://getpm2.com/install.sh | bash
-pm2 install pm2-server-monit
+# if [ `which pm2` ]
+# then
+# 	echo "Pm2 already installed"
+# else 
+# 	echo "Installing Pm2"
+# 	wget -qO- https://getpm2.com/install.sh | bash
+# 	pm2 install pm2-server-monit
+# fi
 
 # setup nginx config files + html + nodeserver
 
 #####################################
-#############Add TMUX conf...
+#############TODO: Add TMUX conf...
 
 
 echo -e "\033[35m ## Copying Config Files\033[m"
