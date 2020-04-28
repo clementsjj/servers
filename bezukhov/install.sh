@@ -100,6 +100,7 @@ sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/cl
 sudo curl -o /etc/nginx/conf.d/nodereverse.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/nodereverse.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/src/index.html
 sudo curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/src/nodeserver.js
+sudo curl -o /home/jj/reset.sh https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/reset.sh
 echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
 sudo chown -R $USER:$USER /etc/nginx/conf.d
 sudo chown $USER:$USER /etc/nginx/nginx.conf
