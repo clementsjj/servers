@@ -99,7 +99,9 @@ sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/default.conf
 sudo curl -o /etc/nginx/conf.d/nodereverse.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/nodereverse.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/index.html
-curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
+sudo curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/nodeserver.js
+
+
 echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
 sudo chown -R $USER:$USER /etc/nginx/conf.d
 sudo chown $USER:$USER /etc/nginx/nginx.conf
@@ -151,7 +153,6 @@ sudo systemctl status nginx
 pm2 start /home/jj/nodeserver.js
 
 # Start Strapi Biz
-
 
 echo -e "\033[9;35m ## SETUP COMPLETE ##\033[m"
 echo "Run setupbackend.sh to setup Strapi"
