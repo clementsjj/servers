@@ -2,7 +2,7 @@
 # 34m=blue;32m=green;36m=cyan;35m=magenta;31m=red; 
 
 # Arrays
-programs=(nginx htop tmux ufw git wget yarn sqlite3)
+programs=(nginx htop tmux ufw git wget yarn sqlite3 mysql-server)
 notinstalled=()
 npmpackages=(pm2 npx gatsby)
 npmnotinstalled=()
@@ -80,7 +80,15 @@ echo -e "Packages to install: ${notinstalled[@]}"
 for i in ${notinstalled[@]}
 do
 	echo -e "\033[9;35m ## Installing ${i}...\033[m"
-	sudo apt -q install -y ${i}
+	if [ $i = "yarn"]
+	then
+		curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+		echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+		sudo apt update
+		sudo apt -q install yarn
+	else
+		sudo apt -q install -y ${i}
+	fi
 done
 
 #######################
@@ -119,7 +127,7 @@ done
 #######################
 # Copy Config Files
 echo -e "\033[35m ## Copying Config Files\033[m"
-sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhob/config/nginx.conf
+sudo curl -o /etc/nginx/nginx.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/nginx.conf
 sudo curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/default.conf
 sudo curl -o /etc/nginx/conf.d/nodereverse.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/nodereverse.conf
 sudo curl -o /home/jj/www/index.html https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/src/index.html
@@ -127,6 +135,11 @@ sudo curl -o /home/jj/nodeserver.js https://raw.githubusercontent.com/clementsjj
 sudo curl -o /home/jj/reset.sh https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/reset.sh
 sudo curl -o /home/jj/.tmux.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/.tmux.conf
 sudo curl -o /etc/nginx/conf.d/strapi.reverse.conf https://raw.githubusercontent.com/clementsjj/servers/master/bezukhov/config/strapi.reverse.conf
+
+
+############### Delete sites-available , sites-enabled
+sudo rm -rf /etc/nginx/sites-available
+sudo rm -rf /etc/nginx/sites-enabled
 
 # Set Ownership
 echo -e "\033[1;35m ## Setting Config File Ownership\033[m"
@@ -154,6 +167,11 @@ sudo ufw enable
 sudo ufw reload
 sudo ufw status
 
+#######################
+# Setup MySQL
+#######################
+echo -e "\033[9;35m ## Setting up MySQL...\033[m"
+sudo mysql_secure_installation
 
 #######################
 # Setup .bashrc
