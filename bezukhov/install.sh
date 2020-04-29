@@ -2,7 +2,7 @@
 # 34m=blue;32m=green;36m=cyan;35m=magenta;31m=red; 
 
 # Arrays
-programs=(nginx htop tmux ufw git wget yarn sqlite3 mysql-server)
+programs=(nginx htop tmux ufw git wget yarn sqlite3 mysql-server php)
 notinstalled=()
 npmpackages=(pm2 npx gatsby)
 npmnotinstalled=()
@@ -86,6 +86,9 @@ do
 		echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 		sudo apt update
 		sudo apt -q install yarn
+	elif [ $i = "php" ]
+	then
+		sudo apt install php-fpm
 	else
 		sudo apt -q install -y ${i}
 	fi
@@ -172,6 +175,9 @@ sudo ufw status
 #######################
 echo -e "\033[9;35m ## Setting up MySQL...\033[m"
 sudo mysql_secure_installation
+
+# Check status:
+# systemctl status php7.2-fpm
 
 #######################
 # Setup .bashrc
